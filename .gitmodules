@@ -1,0 +1,3 @@
+[submodule "rure"]
+	path = rure
+	url = http://github.com/rust-lang/regex
