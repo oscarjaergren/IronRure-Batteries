@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>IronRure.Batteries-Linux</id>
+    <version>0.0.4</version>
+    <authors>Will Speak</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Rust Regex (rure) native build - Linux</description>
+  </metadata>
+  <files>
+    <file src="contents\**" />
+  </files>
+</package>
