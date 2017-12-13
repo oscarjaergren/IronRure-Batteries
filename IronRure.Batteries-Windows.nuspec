@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>IronRure.Batteries-Windows</id>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <authors>Will Speak</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Rust Regex (rure) native build - Windows</description>
