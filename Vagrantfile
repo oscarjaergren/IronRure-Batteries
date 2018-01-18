@@ -2,6 +2,8 @@
 # vi: set ft=ruby :
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
+  
+  config.vm.synced_folder ".", "/home/vagrant/shared/"
 
   config.vm.provision "shell", inline: <<-SHELL
     sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'

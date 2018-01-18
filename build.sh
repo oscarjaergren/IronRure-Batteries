@@ -40,4 +40,4 @@ mkdir -p contents/runtimes/$rid/native/
 cp rure/regex-capi/target/release/librure* contents/runtimes/$rid/native/
 
 # Pack it all up
-nuget pack IronRure.Batteries-$platform.nuspec -o .
+dotnet pack IronRure.Batteries-$platform.csproj -o .
