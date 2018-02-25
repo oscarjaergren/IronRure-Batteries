@@ -12,5 +12,6 @@ Vagrant.configure(2) do |config|
     sudo apt-get install -y dotnet-dev-1.0.4 git
     curl https://sh.rustup.rs -sSf -o rustup.sh
     sh rustup.sh -y
+    echo 'PATH=${PATH}:~/.cargo/bin' >> ~/.profile
   SHELL
 end
