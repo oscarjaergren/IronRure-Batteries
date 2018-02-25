@@ -37,7 +37,7 @@ git submodule init && git submodule update
 # create a folder for the package to reside in
 rm -rf contents
 mkdir -p contents/runtimes/$rid/native/
-cp rure/regex-capi/target/release/librure* contents/runtimes/$rid/native/
+cp rure/target/release/librure* contents/runtimes/$rid/native/
 
 # Pack it all up
 dotnet pack IronRure.Batteries-$platform.csproj -o .
