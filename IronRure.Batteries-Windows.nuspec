@@ -6,9 +6,6 @@
     <authors>Will Speak</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Rust Regex (rure) native build - Windows</description>
-    <contentFiles>
-      <files include="**/*.dll" buildAction="None" copyToOutput="true" />
-    </contentFiles>
     <dependencies>
       <group targetFramework=".NETStandard1.0">
         <dependency id="Microsoft.NETCore.Platforms" version="[1.0.1, )" />
@@ -16,8 +13,7 @@
     </dependencies>
   </metadata>
   <files>
+    <file src="nuget\build\IronRure.Batteries-Windows.targets" target="build\" />
     <file src="contents\**" />
-    <file src="contents\runtimes\win-x64\native\rure.dll" target="contentFiles\any\net45\rure_x64\rure.dll" />
-    <file src="contents\runtimes\win-x86\native\rure.dll" target="contentFiles\any\net45\rure_x86\rure.dll" />
   </files>
 </package>
