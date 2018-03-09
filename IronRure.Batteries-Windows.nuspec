@@ -9,6 +9,11 @@
     <contentFiles>
       <files include="**/*.dll" buildAction="None" copyToOutput="true" />
     </contentFiles>
+    <dependencies>
+      <group targetFramework=".NETStandard1.0">
+        <dependency id="Microsoft.NETCore.Platforms" version="[1.0.1, )" />
+      </group>
+    </dependencies>
   </metadata>
   <files>
     <file src="contents\**" />

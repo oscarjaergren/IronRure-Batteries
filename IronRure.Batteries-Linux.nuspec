@@ -6,6 +6,11 @@
     <authors>Will Speak</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Rust Regex (rure) native build - Linux</description>
+    <dependencies>
+      <group targetFramework=".NETStandard1.0">
+        <dependency id="Microsoft.NETCore.Platforms" version="[1.0.1, )" />
+      </group>
+    </dependencies>
   </metadata>
   <files>
     <file src="contents\**" />
