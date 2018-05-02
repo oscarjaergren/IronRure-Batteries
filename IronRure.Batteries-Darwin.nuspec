@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>IronRure.Batteries-Darwin</id>
-    <version>2.9.0</version>
+    <version>100.0.0</version>
     <authors>Will Speak</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Rust Regex (rure) native build - Darwin</description>
