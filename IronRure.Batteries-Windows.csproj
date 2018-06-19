@@ -9,7 +9,6 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageId>IronRure.Batteries-Windows</PackageId>
     <PackageVersion>100.0.0</PackageVersion>
-    <PackageId>IronRure.Batteries-Windows</PackageId>
     <Authors>Will Speak</Authors>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>Rust Regex (rure) native build - Windows</Description>

@@ -1,8 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
-	<NuspecFile>IronRure.Batteries-Linux.nuspec</NuspecFile>
+    <TargetFrameworks>netstandard1.0</TargetFrameworks>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <PackageId>IronRure.Batteries-Linux</PackageId>
+    <PackageVersion>100.0.0</PackageVersion>
+    <Authors>Will Speak</Authors>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>Rust Regex (rure) native build - Linux</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="runtimes\linux\native\librure.so">
+      <PackagePath>runtimes\linux\native\librure.so</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+  </ItemGroup>
 
 </Project>

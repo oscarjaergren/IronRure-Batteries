@@ -2,7 +2,7 @@
 
 set -e
 
-curl https://sh.rustup.rs -sSf | sh -s -- -y -v
+curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 dotnet --version
 /home/appveyor/.cargo/bin/cargo --version
