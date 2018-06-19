@@ -4,8 +4,9 @@ set -e
 
 curl https://sh.rustup.rs -sSf | sh -s -- -y -v
 
-cargo --version
 dotnet --version
+rustc --version
+cargo --version
 
 # Work out the platform we are building on, and the RID which goes
 # along with it.
