@@ -16,4 +16,5 @@ cargo clean
 cargo build --release
 xcopy ..\target\release\rure.dll %~dp0\runtimes\win-x86\native\
 
+pushd %~dp0
 dotnet build IronRure.Batteries-Windows.csproj
