@@ -4,5 +4,5 @@ if ($PSVersionTable.Platform -eq "Unix") {
 else{
     Start-FileDownload "https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-msvc.exe"
     Start-FileDownload "https://static.rust-lang.org/dist/rust-nightly-i686-pc-windows-msvc.exe"
-    ci_build_win.bat
+    .\ci_build_win.bat
 }
