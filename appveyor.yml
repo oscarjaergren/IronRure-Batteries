@@ -1,0 +1,10 @@
+image: Visual Studio 2017
+install:
+  - ps: Start-FileDownload "https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-msvc.exe"
+  - ps: Start-FileDownload "https://static.rust-lang.org/dist/rust-nightly-i686-pc-windows-msvc.exe"
+  - SET PATH=%PATH%;C:\Program Files (x86)\Rust\bin
+  - SET PATH=%PATH%;C:\MinGW\bin
+build_script:
+  - ci_build_win.cmd
+artifacts:
+- path: '**\*.nupkg'

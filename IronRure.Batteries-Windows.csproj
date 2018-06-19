@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.0;net45</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <PackageId>IronRure.Batteries-Windows</PackageId>
+    <PackageVersion>100.0.0</PackageVersion>
+    <PackageId>IronRure.Batteries-Windows</PackageId>
+    <Authors>Will Speak</Authors>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>Rust Regex (rure) native build - Windows</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="nuget\build\IronRure.Batteries-Windows.targets">
+      <PackagePath>build\IronRure.Batteries-Windows.targets</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="runtimes\win-x86\native\rure.dll">
+      <PackagePath>runtimes\win-x86\native\rure.dll</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="runtimes\win-x64\native\rure.dll">
+      <PackagePath>runtimes\win-x64\native\rure.dll</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+  </ItemGroup>
+
+</Project>
