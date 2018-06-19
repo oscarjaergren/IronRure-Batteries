@@ -1,3 +1,6 @@
+SET PATH=%PATH%;C:\Program Files (x86)\Rust\bin
+SET PATH=%PATH%;C:\MinGW\bin
+
 pushd %~dp0\rure\regex-capi
 
 SET VCTOOLPATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\
