@@ -4,6 +4,6 @@ image:
 install:
   - git submodule update --init --recursive
 build_script:
-  - ps: ci_build.ps1
+  - ps: .\ci_build.ps1
 artifacts:
 - path: '**\*.nupkg'
