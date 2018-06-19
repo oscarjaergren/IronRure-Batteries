@@ -2,6 +2,8 @@
 
 set -e
 
+curl https://sh.rustup.rs -sSf | sh -s -- -y
+
 # Check for the programs we need to do the build
 
 if ! (which git && which cargo && which dotnet)>/dev/null
