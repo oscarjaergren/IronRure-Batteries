@@ -33,6 +33,4 @@ rm -rf runtimes
 mkdir -p runtimes/$rid/native/
 cp rure/target/release/librure* runtimes/$rid/native/
 
-# Pack it all up
-dotnet restore IronRure.Batteries-$platform.csproj
-dotnet pack IronRure.Batteries-$platform.csproj -o .
+dotnet build -c Release IronRure.Batteries-Windows.csproj
