@@ -4,13 +4,8 @@ set -e
 
 curl https://sh.rustup.rs -sSf | sh -s -- -y
 
-# Check for the programs we need to do the build
-
-if ! (which git && which cargo && which dotnet)>/dev/null
-then
-	echo "git, cargo and dotnet are rquired for compilation" 1>&2
-	exit 1
-fi
+cargo --version
+dotnet --version
 
 # Work out the platform we are building on, and the RID which goes
 # along with it.
