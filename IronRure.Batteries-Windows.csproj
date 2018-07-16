@@ -2,13 +2,9 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.0;net45</TargetFrameworks>
-  </PropertyGroup>
-
-  <PropertyGroup>
+    <Version>$(BatteriesVersion)</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <PackageId>IronRure.Batteries-Windows</PackageId>
-    <PackageVersion>100.0.0</PackageVersion>
     <Authors>Will Speak</Authors>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>Rust Regex (rure) native build - Windows</Description>

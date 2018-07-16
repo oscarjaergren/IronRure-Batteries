@@ -2,13 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup>
+    <Version>$(BatteriesVersion)</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <PackageId>IronRure.Batteries-Darwin</PackageId>
-    <PackageVersion>100.0.0</PackageVersion>
     <Authors>Will Speak</Authors>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>Rust Regex (rure) native build - Darwin</Description>
