@@ -1,10 +1,14 @@
 # IronRure-Batteries
 
-[![NuGet version](https://badge.fury.io/nu/IronRure.Batteries-Windows.svg)](https://badge.fury.io/nu/IronRure.Batteries-Windows)
-[![NuGet version](https://badge.fury.io/nu/IronRure.Batteries-Linux.svg)](https://badge.fury.io/nu/IronRure.Batteries-Linux)
-[![NuGet version](https://badge.fury.io/nu/IronRure.Batteries-Darwin.svg)](https://badge.fury.io/nu/IronRure.Batteries-Darwin)
-[![Build status](https://ci.appveyor.com/api/projects/status/662xbciv1k2hoddc?svg=true)](https://ci.appveyor.com/project/iwillspeak/IronRure-Batteries)
 [![MIT License](https://img.shields.io/github/license/iwillspeak/IronRure-Batteries.svg)](https://github.com/iwillspeak/IronRure-Batteries/blob/master/LICENSE)
+
+
+| Runtimes         | Nuget package | Build         |
+| ---------------  | ------------- | ------------- |
+| windows          | [![NuGet version](https://badge.fury.io/nu/IronRure.Batteries-Windows.svg)](https://badge.fury.io/nu/IronRure.Batteries-Windows)  | [![Build status](https://ci.appveyor.com/api/projects/status/github/iwillspeak/IronRure-Batteries?branch=master&svg=true)](https://ci.appveyor.com/project/iwillspeak/IronRure-Batteries)  |
+| linux            | [![NuGet version](https://badge.fury.io/nu/IronRure.Batteries-Linux.svg)](https://badge.fury.io/nu/IronRure.Batteries-Linux)      |  [![Build status](https://ci.appveyor.com/api/projects/status/github/iwillspeak/IronRure-Batteries?branch=master&svg=true)](https://ci.appveyor.com/project/iwillspeak/IronRure-Batteries) |
+| osx              | [![NuGet version](https://badge.fury.io/nu/IronRure.Batteries-Darwin.svg)](https://badge.fury.io/nu/IronRure.Batteries-Darwin)    |  [![Build status](https://api.travis-ci.org/iwillspeak/IronRure-Batteries.svg?branch=master&svg=true)](https://api.travis-ci.org/iwillspeak/IronRure-Batteries) |
+
 
 Nuget Package of Rust Regex C API.
 
