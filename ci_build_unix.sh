@@ -4,7 +4,7 @@ set -e
 
 # Install Rust
 curl https://sh.rustup.rs -sSf | sh -s -- -y
-PATH=/home/appveyor/.cargo/bin:${PATH}
+source $HOME/.cargo/env
 
 # Log out the tools versions
 dotnet --version
