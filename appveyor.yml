@@ -7,3 +7,4 @@ build_script:
   - ps: .\ci_build.ps1
 artifacts:
 - path: '**\*.nupkg'
+skip_branch_with_pr: true
