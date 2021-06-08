@@ -1,24 +1,48 @@
+variables:
+- group: ApiKeys
+
 trigger:
 - master
 
-jobs:
-- job: Unix
-  strategy:
-    matrix:
-      Linux:
-        vmImage: 'ubuntu-latest'
-      MacOS:
-        vmImage: 'macOS-latest'
-  pool:
-    vmImage: $(vmImage)
-  steps:
-  - script: bash ./ci_build_unix.sh
-  - publish: 'PublishOutput/'
-    artifact: NuGets$(vmImage)
-- job: Win
-  pool:
-    vmImage: 'vs2017-win2016'
-  steps:
-  - powershell: .\ci_build.ps1
-  - publish: 'PublishOutput/'
-    artifact: NuGetsWin
+stages:
+
+- stage: Build
+  jobs:
+  - job: Unix
+    strategy:
+      matrix:
+        Linux:
+          vmImage: 'ubuntu-latest'
+        MacOS:
+          vmImage: 'macOS-latest'
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - script: bash ./ci_build_unix.sh
+    - publish: 'PublishOutput/'
+      artifact: NuGets$(vmImage)
+  - job: Win
+    pool:
+      vmImage: 'vs2017-win2016'
+    steps:
+    - powershell: .\ci_build.ps1
+    - publish: 'PublishOutput/'
+      artifact: NuGetsWin
+
+- stage: Deploy
+  jobs:
+  - deployment: NuGetDeploy
+    displayName: Push NuGet Packages
+    pool:
+      vmImage: 'Ubuntu-latest'
+    environment: 'live-nuget'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            patterns: '**/*.nupkg'
+          - script: |
+              dotnet nuget push --api-key $API_KEY --source "NuGetOrg" $(Pipeline.Workspace)/*.nupkg
+            env:
+              API_KEY: $(NuGetOrgApiKey)
