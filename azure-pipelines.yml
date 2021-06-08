@@ -1,0 +1,24 @@
+trigger:
+- master
+
+jobs:
+- job: Unix
+  strategy:
+    matrix:
+      Linux:
+        vmImage: 'ubuntu-latest'
+      MacOS:
+        vmImage: 'macOS-latest'
+  pool:
+    vmImage: $(vmImage)
+  steps:
+  - script: bash ./ci_build_unix.sh
+  - publish: 'PublishOutput/'
+    artifact: NuGets$(vmImage)
+- job: Win
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - powershell: .\ci_build.ps1
+  - publish: 'PublishOutput/'
+    artifact: NuGetsWin
