@@ -43,6 +43,6 @@ stages:
           - download: current
             patterns: '**/*.nupkg'
           - script: |
-              dotnet nuget push --api-key $API_KEY --source "https://api.nuget.org/v3/index.json" $(Pipeline.Workspace)/*.nupkg
+              dotnet nuget push --api-key $API_KEY --source "https://api.nuget.org/v3/index.json" $(Pipeline.Workspace)/**/*.nupkg
             env:
               API_KEY: $(NuGetOrgApiKey)
