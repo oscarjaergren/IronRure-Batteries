@@ -1,5 +1,6 @@
 <Project>
   <PropertyGroup>
     <BatteriesVersion>154.0.0</BatteriesVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 </Project>
