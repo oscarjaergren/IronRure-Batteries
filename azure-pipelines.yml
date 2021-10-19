@@ -2,7 +2,7 @@ variables:
 - group: ApiKeys
 
 trigger:
-- master
+- main
 
 stages:
 
@@ -30,6 +30,7 @@ stages:
       artifact: NuGetsWin
 
 - stage: Deploy
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/main'))
   jobs:
   - deployment: NuGetDeploy
     displayName: Push NuGet Packages
