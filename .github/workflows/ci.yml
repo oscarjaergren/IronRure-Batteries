@@ -45,10 +45,9 @@ jobs:
           dotnet-version: '9.0.x'
 
       - name: Setup Rust toolchain (stable)
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
-          override: true
+          components: rustfmt, clippy  # if needed
 
       - name: Install 32-bit Rust toolchain (Windows)
         if: runner.os == 'Windows'
