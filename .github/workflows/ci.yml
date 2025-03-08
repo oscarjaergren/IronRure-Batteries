@@ -9,7 +9,7 @@ on:
       - main
   workflow_dispatch:
 
-  # Set permissions for the workflow.
+# Set permissions for the workflow.
 permissions:
   contents: write
   pull-requests: write
@@ -25,15 +25,12 @@ jobs:
           - os: windows-latest
             platform: Windows
             script: .\\build.ps1
-            shell: pwsh
           - os: ubuntu-latest
             platform: Linux
             script: ./build.sh
-            shell: bash
           - os: macos-latest
             platform: macOS
             script: ./build.sh
-            shell: bash
 
     steps:
       - name: Check out code (with submodules)
@@ -63,7 +60,6 @@ jobs:
 
       - name: Run platform build script (build.ps1 or build.sh)
         run: ${{ matrix.script }}
-        shell: ${{ matrix.shell }}
 
       # - name: Run tests to validate package
       #   run: dotnet test
