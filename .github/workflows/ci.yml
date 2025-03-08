@@ -61,9 +61,6 @@ jobs:
       - name: Run platform build script (build.ps1 or build.sh)
         run: ${{ matrix.script }}
 
-      # - name: Run tests to validate package
-      #   run: dotnet test
-
       - name: Upload NuGet package artifact
         uses: actions/upload-artifact@v4
         with:
