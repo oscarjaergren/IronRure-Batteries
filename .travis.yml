@@ -1,6 +1,0 @@
-language: csharp
-script:
-  - bash ci_build_unix.sh
-mono: none
-dotnet: "2.1.300"
-os: "osx"
