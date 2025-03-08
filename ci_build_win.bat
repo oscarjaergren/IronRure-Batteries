@@ -43,6 +43,11 @@ rustup default stable-x86_64-pc-windows-msvc
 cargo --version --verbose
 cargo clean
 cargo build --release
+
+REM --- Ensure the target directory exists for x64 ---
+if not exist "%~dp0\runtimes\win-x64\native\" (
+    mkdir "%~dp0\runtimes\win-x64\native\"
+)
 xcopy ..\target\release\rure.dll %~dp0\runtimes\win-x64\native\ /Y
 REM xcopy ..\target\release\rure.dll %~dp0\runtimes\win-x64\native\
 
@@ -52,9 +57,14 @@ rustup default stable-i686-pc-windows-msvc
 cargo --version --verbose
 cargo clean
 cargo build --release
+
+REM --- Ensure the target directory exists for x86 ---
+if not exist "%~dp0\runtimes\win-x86\native\" (
+    mkdir "%~dp0\runtimes\win-x86\native\"
+)
 xcopy ..\target\release\rure.dll %~dp0\runtimes\win-x86\native\ /Y
 REM xcopy ..\target\release\rure.dll %~dp0\runtimes\win-x86\native\
 
 popd
 REM pushd %~dp0
-dotnet build -c Release -o PublishOutput IronRure.Batteries-Windows.csproj 
+dotnet build -c Release -o PublishOutput IronRure.Batteries-Windows.csproj
