@@ -14,10 +14,12 @@ permissions:
   contents: write
   pull-requests: write
   checks: write
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false      # This allows the matrix jobs to run independently.
       matrix:
         include:
           - os: windows-latest
