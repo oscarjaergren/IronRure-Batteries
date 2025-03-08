@@ -1,4 +1,4 @@
-name: Build and Pack NuGet Packages
+name: Build IronRure-Batteries
 
 on:
   push:
@@ -9,48 +9,65 @@ on:
       - main
   workflow_dispatch:
 
-# Set permissions for the workflow.
+  # Set permissions for the workflow.
 permissions:
   contents: write
   pull-requests: write
   checks: write
-
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         include:
-          - os: ubuntu-latest
-            project: IronRure.Batteries-Linux.csproj
           - os: windows-latest
-            project: IronRure.Batteries-Windows.csproj
+            platform: Windows
+            script: .\\build.ps1
+            shell: pwsh
+          - os: ubuntu-latest
+            platform: Linux
+            script: ./build.sh
+            shell: bash
           - os: macos-latest
-            project: IronRure.Batteries-Darwin.csproj
-    runs-on: ${{ matrix.os }}
-    continue-on-error: true
+            platform: macOS
+            script: ./build.sh
+            shell: bash
+
     steps:
-      - name: Checkout Repository
+      - name: Check out code (with submodules)
         uses: actions/checkout@v4
         with:
           submodules: true
           fetch-depth: 0
 
-      - name: Setup .NET SDK
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x'  # adjust the version as needed
+          dotnet-version: '9.0.x'
 
-      - name: Restore dependencies
-        run: dotnet restore ${{ matrix.project }}
+      - name: Setup Rust toolchain (stable)
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
 
-      - name: Build project
-        run: dotnet build ${{ matrix.project }} --configuration Release --no-restore
+      - name: Install 32-bit Rust toolchain (Windows)
+        if: runner.os == 'Windows'
+        run: rustup toolchain install stable-i686-pc-windows-msvc
 
-      - name: Pack NuGet package
-        run: dotnet pack ${{ matrix.project }} --configuration Release --no-build --output ./nupkgs
+      - name: Build Rust crate (rure) with cargo
+        run: cargo build --release
+        working-directory: rure/regex-capi
+
+      - name: Run platform build script (build.ps1 or build.sh)
+        run: ${{ matrix.script }}
+        shell: ${{ matrix.shell }}
+
+      # - name: Run tests to validate package
+      #   run: dotnet test
 
       - name: Upload NuGet package artifact
         uses: actions/upload-artifact@v4
         with:
-          name: nuget-${{ matrix.project }}
-          path: ./nupkgs/*.nupkg
+          name: IronRure.Batteries-${{ matrix.platform }}.nupkg
+          path: '**/*.nupkg'
