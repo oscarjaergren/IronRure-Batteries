@@ -1,0 +1,45 @@
+name: Build and Pack NuGet Packages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [published]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            project: IronRure.Batteries-Linux.csproj
+          - os: windows-latest
+            project: IronRure.Batteries-Windows.csproj
+          - os: macos-latest
+            project: IronRure.Batteries-Darwin.csproj
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'  # adjust the version as needed
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ matrix.project }}
+
+      - name: Build project
+        run: dotnet build ${{ matrix.project }} --configuration Release --no-restore
+
+      - name: Pack NuGet package
+        run: dotnet pack ${{ matrix.project }} --configuration Release --no-build --output ./nupkgs
+
+      - name: Upload NuGet package artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: nuget-${{ matrix.project }}
+          path: ./nupkgs/*.nupkg
