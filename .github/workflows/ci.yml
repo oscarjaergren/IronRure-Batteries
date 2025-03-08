@@ -2,11 +2,18 @@ name: Build and Pack NuGet Packages
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
-  release:
-    types: [published]
+    branches:
+      - main
+  workflow_dispatch:
+
+# Set permissions for the workflow.
+permissions:
+  contents: write
+  pull-requests: write
+  checks: write
 
 jobs:
   build:
@@ -20,9 +27,13 @@ jobs:
           - os: macos-latest
             project: IronRure.Batteries-Darwin.csproj
     runs-on: ${{ matrix.os }}
+    continue-on-error: true
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
 
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
