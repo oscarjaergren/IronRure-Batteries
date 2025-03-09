@@ -40,4 +40,4 @@ BuildForRid "win-x86" "stable-i686" "buildi686.bat"
 BuildForRid "win-x64" "stable-x86_64" "buildx86_64.bat"
 
 # Pack it all up
-dotnet pack IronRure.Batteries-Windows.csproj -c Release -o PublishOutput
+dotnet pack IronRure.Batteries-Windows.csproj -c Release

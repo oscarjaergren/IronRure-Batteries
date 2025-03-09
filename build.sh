@@ -40,4 +40,4 @@ mkdir -p runtimes/$rid/native/
 cp -r rure/target/release/librure* runtimes/$rid/native/
 
 # Pack it all up
-dotnet build -c Release  -o PublishOutput IronRure.Batteries-$platform.csproj
+dotnet pack IronRure.Batteries-$platform.csproj -c Release 
