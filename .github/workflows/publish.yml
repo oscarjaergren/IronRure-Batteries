@@ -19,6 +19,7 @@ jobs:
   publish:
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Download Windows Package
         uses: actions/download-artifact@v4
