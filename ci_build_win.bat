@@ -1,3 +1,4 @@
+REM --- Set up PATH and install toolchains ---
 SET PATH=%PATH%;C:\Program Files (x86)\Rust\bin
 SET PATH=%PATH%;C:\MinGW\bin
 
@@ -10,23 +11,32 @@ git submodule update --init
 
 pushd %~dp0\rure\regex-capi
 
-SET VCTOOLPATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\
-echo "%VCTOOLPATH%
-
-call "%VCTOOLPATH%\vcvars64.bat"
+REM --- Build for x64 ---
+call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
 rustup default stable-x86_64-pc-windows-msvc
 cargo --version --verbose
 cargo clean
 cargo build --release
+
+REM --- Ensure the target directory exists for x64 ---
+if not exist "%~dp0\runtimes\win-x64\native\" (
+    mkdir "%~dp0\runtimes\win-x64\native\"
+)
 xcopy ..\target\release\rure.dll %~dp0\runtimes\win-x64\native\
 
-
-call "%VCTOOLPATH%\vcvars32.bat"
+REM --- Build for x86 ---
+call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
 rustup default stable-i686-pc-windows-msvc
 cargo --version --verbose
 cargo clean
 cargo build --release
+
+REM --- Ensure the target directory exists for x86 ---
+if not exist "%~dp0\runtimes\win-x86\native\" (
+    mkdir "%~dp0\runtimes\win-x86\native\"
+)
+
 xcopy ..\target\release\rure.dll %~dp0\runtimes\win-x86\native\
 
 pushd %~dp0
-dotnet build -c Release -o PublishOutput IronRure.Batteries-Windows.csproj 
+dotnet build -c Release -o PublishOutput IronRure.Batteries-Windows.csproj

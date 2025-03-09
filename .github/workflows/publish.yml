@@ -1,0 +1,29 @@
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Windows Package
+        uses: actions/download-artifact@v4
+        with:
+          name: nuget-IronRure.Batteries-Windows.csproj
+      - name: Download Linux Package
+        uses: actions/download-artifact@v4
+        with:
+          name: nuget-IronRure.Batteries-Linux.csproj
+      - name: Download macOS Package
+        uses: actions/download-artifact@v4
+        with:
+          name: nuget-IronRure.Batteries-Darwin.csproj
+
+    #   - name: Publish NuGet Packages to NuGet.org
+    #     run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+    #     env:
+    #       NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+
+      - name: Publish NuGet Packages to GitHub Packages
+        run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate

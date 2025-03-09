@@ -1,0 +1,67 @@
+name: Build IronRure-Batteries
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Set permissions for the workflow.
+permissions:
+  contents: write
+  pull-requests: write
+  checks: write
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false      # This allows the matrix jobs to run independently.
+      matrix:
+        include:
+          - os: windows-latest
+            platform: Windows
+            script: .\\build.ps1
+          - os: ubuntu-latest
+            platform: Linux
+            script: ./build.sh
+          - os: macos-latest
+            platform: macOS
+            script: ./build.sh
+
+    steps:
+      - name: Check out code (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Setup Rust toolchain (stable)
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy  # if needed
+
+      - name: Install 32-bit Rust toolchain (Windows)
+        if: runner.os == 'Windows'
+        run: rustup toolchain install stable-i686-pc-windows-msvc
+
+      - name: Build Rust crate (rure) with cargo
+        run: cargo build --release
+        working-directory: rure/regex-capi
+
+      - name: Run platform build script (build.ps1 or build.sh)
+        run: ${{ matrix.script }}
+
+      - name: Upload NuGet package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: IronRure.Batteries-${{ matrix.platform }}.nupkg
+          path: '**/*.nupkg'

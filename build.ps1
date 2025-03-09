@@ -18,7 +18,10 @@ if (!(Test-Path .\nuget.exe))
 }
 
 # Clean up the output directory first
-Remove-Item -Force -Recurse -ErrorAction Continue contents
+if (Test-Path "contents") {
+    Remove-Item -Force -Recurse -ErrorAction Continue contents
+}
+
 
 function BuildForRid([string] $rid, [string] $toolchain, [string] $buildscript)
 {
@@ -29,12 +32,12 @@ function BuildForRid([string] $rid, [string] $toolchain, [string] $buildscript)
     &cmd /c $buildscript
 
     # create a folder for the package to reside in
-    &mkdir -p contents/runtimes/$rid/native/
-    Copy-Item rure/target/release/rure* contents/runtimes/$rid/native/
+    &mkdir -p runtimes/$rid/native/
+    Copy-Item rure/target/release/rure* runtimes/$rid/native/
 }
 
 BuildForRid "win-x86" "stable-i686" "buildi686.bat"
 BuildForRid "win-x64" "stable-x86_64" "buildx86_64.bat"
 
 # Pack it all up
-&.\nuget.exe pack IronRure.Batteries-$platform.nuspec
+dotnet pack IronRure.Batteries-Windows.csproj -c Release -o PublishOutput
