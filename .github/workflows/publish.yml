@@ -4,9 +4,13 @@ on:
     types:
       - published # Run the workflow when a new GitHub release is published
   workflow_dispatch: # Allow manual triggering from the GitHub UI
+
+# Set permissions for the workflow.
 permissions:
   contents: write
   packages: write
+  checks: write          
+  pull-requests: write  
 
 jobs:
   build:
