@@ -1,46 +1,35 @@
 name: Publish IronRure-Batteries
-
 on:
-  push:
-    branches:
-      - 'main'       # Run the workflow when pushing to the main branch  
   release:
     types:
-      - published    # Run the workflow when a new GitHub release is published
-  workflow_dispatch:  # Allow manual triggering from the GitHub UI
-
+      - published # Run the workflow when a new GitHub release is published
+  workflow_dispatch: # Allow manual triggering from the GitHub UI
 permissions:
   contents: write
   packages: write
 
 jobs:
+  build:
+    uses: ./.github/workflows/ci.yml
+
   publish:
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
     steps:
-    - name: Download Windows package from CI workflow
-      uses: dawidd6/action-download-artifact@v2
-      with:
-        workflow: ci.yml
-        workflow_conclusion: success
-        name: IronRure.Batteries-Windows.nupkg
-        path: nupkgs
+      - name: Download Windows Package
+        uses: actions/download-artifact@v4
+        with:
+          name: IronRure.Batteries-Windows.nupkg
 
-    - name: Download Linux package from CI workflow
-      uses: dawidd6/action-download-artifact@v2
-      with:
-        workflow: ci.yml
-        workflow_conclusion: success
-        name: IronRure.Batteries-Linux.nupkg
-        path: nupkgs
+      - name: Download Linux Package
+        uses: actions/download-artifact@v4
+        with:
+          name: IronRure.Batteries-Linux.nupkg
+                      
+      - name: Download macOS Package
+        uses: actions/download-artifact@v4
+        with:
+          name: IronRure.Batteries-macOS.nupkg
 
-    - name: Download macOS package from CI workflow
-      uses: dawidd6/action-download-artifact@v2
-      with:
-        workflow: ci.yml
-        workflow_conclusion: success
-        name: IronRure.Batteries-macOS.nupkg
-        path: nupkgs
-
-    - name: Publish NuGet Packages to GitHub Packages
-      run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
+      - name: Publish NuGet Packages to GitHub Packages
+        run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
