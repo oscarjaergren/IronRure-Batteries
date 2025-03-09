@@ -25,16 +25,19 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: IronRure.Batteries-Windows.nupkg
+          path: nupkgs
 
       - name: Download Linux Package
         uses: actions/download-artifact@v4
         with:
           name: IronRure.Batteries-Linux.nupkg
+          path: nupkgs
                       
       - name: Download macOS Package
         uses: actions/download-artifact@v4
         with:
           name: IronRure.Batteries-macOS.nupkg
+          path: nupkgs
 
       - name: Publish NuGet Packages to GitHub Packages
         run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
