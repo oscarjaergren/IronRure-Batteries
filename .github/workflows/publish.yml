@@ -1,3 +1,5 @@
+name: Publish IronRure-Batteries
+
 on:
   release:
     types: [published]
@@ -10,15 +12,17 @@ jobs:
       - name: Download Windows Package
         uses: actions/download-artifact@v4
         with:
-          name: nuget-IronRure.Batteries-Windows.csproj
+          name: IronRure.Batteries-Windows.nupkg
+
       - name: Download Linux Package
         uses: actions/download-artifact@v4
         with:
-          name: nuget-IronRure.Batteries-Linux.csproj
+          name: IronRure.Batteries-Linux.nupkg
+                      
       - name: Download macOS Package
         uses: actions/download-artifact@v4
         with:
-          name: nuget-IronRure.Batteries-Darwin.csproj
+          name: IronRure.Batteries-macOS.nupkg
 
     #   - name: Publish NuGet Packages to NuGet.org
     #     run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
