@@ -32,8 +32,8 @@ function BuildForRid([string] $rid, [string] $toolchain, [string] $buildscript)
     &cmd /c $buildscript
 
     # create a folder for the package to reside in
-    &mkdir -p contents/runtimes/$rid/native/
-    Copy-Item rure/target/release/rure* contents/runtimes/$rid/native/
+    &mkdir -p runtimes/$rid/native/
+    Copy-Item rure/target/release/rure* runtimes/$rid/native/
 }
 
 BuildForRid "win-x86" "stable-i686" "buildi686.bat"
